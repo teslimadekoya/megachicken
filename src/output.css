@@ -192,12 +192,6 @@
   .hidden {
     display: none;
   }
-  .h-\[10px\] {
-    height: 10px;
-  }
-  .h-\[21px\] {
-    height: 21px;
-  }
   .h-\[44px\] {
     height: 44px;
   }
@@ -210,20 +204,11 @@
   .h-\[281px\] {
     height: 281px;
   }
-  .h-\[820px\] {
-    height: 820px;
-  }
-  .h-\[832\] {
-    height: 832;
-  }
-  .h-\[832px\] {
-    height: 832px;
-  }
   .h-\[840px\] {
     height: 840px;
   }
-  .h-screen {
-    height: 100vh;
+  .h-full {
+    height: 100%;
   }
   .w-\[50\%\] {
     width: 50%;
@@ -390,14 +375,9 @@
       margin-bottom: 16px;
     }
   }
-  .max-lg\:mb-\[90px\] {
+  .max-lg\:h-full {
     @media (width < 64rem) {
-      margin-bottom: 90px;
-    }
-  }
-  .max-lg\:h-screen {
-    @media (width < 64rem) {
-      height: 100vh;
+      height: 100%;
     }
   }
   .max-lg\:w-\[80\%\] {
@@ -410,9 +390,9 @@
       font-size: 20px;
     }
   }
-  .max-md\:h-screen {
+  .max-md\:h-full {
     @media (width < 48rem) {
-      height: 100vh;
+      height: 100%;
     }
   }
   .max-md\:w-\[80\%\] {
@@ -446,9 +426,9 @@
       display: none;
     }
   }
-  .max-sm\:h-screen {
+  .max-sm\:h-full {
     @media (width < 40rem) {
-      height: 100vh;
+      height: 100%;
     }
   }
   .max-sm\:w-full {
@@ -480,16 +460,6 @@
     @media (width < 40rem) {
       --tw-leading: 44px;
       line-height: 44px;
-    }
-  }
-  .min-lg\:mb-\[12px\] {
-    @media (width >= 64rem) {
-      margin-bottom: 12px;
-    }
-  }
-  .min-lg\:mb-\[90px\] {
-    @media (width >= 64rem) {
-      margin-bottom: 90px;
     }
   }
 }
