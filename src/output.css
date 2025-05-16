@@ -7,18 +7,9 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
-    --color-amber-500: oklch(76.9% 0.188 70.08);
-    --color-gray-100: oklch(96.7% 0.003 264.542);
-    --color-gray-200: oklch(92.8% 0.006 264.531);
-    --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
-    --container-5xl: 64rem;
-    --text-2xl: 1.5rem;
-    --text-2xl--line-height: calc(2 / 1.5);
     --radius-lg: 0.5rem;
-    --radius-xl: 0.75rem;
-    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
     --default-transition-duration: 150ms;
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
@@ -195,23 +186,20 @@
   .mb-\[48px\] {
     margin-bottom: 48px;
   }
-  .mb-\[108px\] {
-    margin-bottom: 108px;
-  }
   .flex {
     display: flex;
   }
   .hidden {
     display: none;
   }
-  .h-\[0px\] {
-    height: 0px;
+  .h-\[10px\] {
+    height: 10px;
+  }
+  .h-\[21px\] {
+    height: 21px;
   }
   .h-\[44px\] {
     height: 44px;
-  }
-  .h-\[80px\] {
-    height: 80px;
   }
   .h-\[120px\] {
     height: 120px;
@@ -222,20 +210,17 @@
   .h-\[281px\] {
     height: 281px;
   }
+  .h-\[820px\] {
+    height: 820px;
+  }
+  .h-\[832\] {
+    height: 832;
+  }
   .h-\[832px\] {
     height: 832px;
   }
   .h-\[840px\] {
     height: 840px;
-  }
-  .h-\[920px\] {
-    height: 920px;
-  }
-  .h-\[1000px\] {
-    height: 1000px;
-  }
-  .h-full {
-    height: 100%;
   }
   .h-screen {
     height: 100vh;
@@ -405,6 +390,11 @@
       margin-bottom: 16px;
     }
   }
+  .max-lg\:mb-\[90px\] {
+    @media (width < 64rem) {
+      margin-bottom: 90px;
+    }
+  }
   .max-lg\:h-screen {
     @media (width < 64rem) {
       height: 100vh;
@@ -490,6 +480,16 @@
     @media (width < 40rem) {
       --tw-leading: 44px;
       line-height: 44px;
+    }
+  }
+  .min-lg\:mb-\[12px\] {
+    @media (width >= 64rem) {
+      margin-bottom: 12px;
+    }
+  }
+  .min-lg\:mb-\[90px\] {
+    @media (width >= 64rem) {
+      margin-bottom: 90px;
     }
   }
 }
