@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+
+
+
+body{
+  max-width: 1440px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+@layer utilities{
+  .didact {
+  font-family: "Didact Gothic", sans-serif;
+  font-style: normal;
+}
+}
+
+@layer utilities{
+.inter {
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+}
+}
+
+@layer utilities{
+.open-sans {
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+
+}
+
+
+}

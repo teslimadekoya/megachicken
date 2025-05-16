@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="output.css">
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+</style>
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+</style>
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
+</style>
+</head>
+<body>
+    <main>
+        <section class="bg-[url('./images/LandingPage.webp')] bg-cover bg-no-repeat bg-center w-full h-full">
+            <header class="flex justify-between items-center px-[56px] py-[28px] max-sm:px-[28px] bg-transparent">
+                <div class="w-[58px] h-[44px]">
+                <img src="./images/Logo.png" alt="">
+
+                </div>
+                <nav class="flex gap-[24px] max-sm:hidden text-white text-[18px] opens-sans">
+                    <a href="">Menu</a>
+                    <a href="">Location</a>
+                    <a href="">About Us</a>
+                    <a href="">Careers</a>
+                </nav>
+            </header>
+
+            <section class="mx-[56px] max-sm:mx-[28px] ">
+                <div class="flex flex-col items-center">
+                    <h1 class="didact text-white text-[88px] leading-[88px] mt-[12px] mb-[8px] text-center font-[600] max-sm:text-[40px] max-sm:leading-[44px] max-sm:mt-[24px] whitespace-nowrap">Fresh. Fast.<br>Flavor-packed.</h1>                    
+                    <p class="inter text-[22px] font-400 leading-[32px] w-[50%] text-white/70 text-center max-xl:w-[70%] max-xl:text-[20px] max-lg:w-[80%] max-lg:text-[20px] max-md:w-[80%]  max-md:text-[16px] max-md:leading-[24px] max-sm:text-[14px]">Mega Chicken serves fresh, flavorful meals—fast. From grilled chicken to seafood and comfort classics, we’ve got your cravings covered.</p>
+                </div>
+                <div class=" flex gap-[12px] mt-[28px] mb-[44px] justify-center max-sm:flex-col items-center max-lg:mb-[16px]">
+                    <a href="" class="open-sans w-fit text-white text-[18px] leading-[28px] font-[700] px-[40px] py-[12px] rounded-[900px] text-center  bg-[#B20201] max-sm:w-full">Order Now</a>
+                    <a href="" class=" flex items-center gap-x-2 justify-center w-fit open-sans text-[#F79F30] text-[18px] leading-[28px] font-[700] px-[20px] py-[12px] rounded-[900px] text-center border-[2px] max-sm:w-full">Watch Video ▶</a>
+                </div>
+
+
+
+
+
+
+
+                
+                <div class="flex justify-center items-center">
+
+                    <div class="w-[900px] overflow-hidden relative mb-[48px]">
+                    <div id="slider" class="flex justify-center items-center gap-[36px]">
+                    <!-- JS will insert images here -->
+                    </div>
+                    </div>
+
+                    <script>
+    const imagePaths = [
+      './images/Image_fx (4).png',
+      './images/Image_fx (4).png',
+      './images/Image_fx (4).png',
+      './images/Image_fx (5) 1.png',
+      './images/Image_fx (6) 2.png',
+    ];
+    const imageCount = imagePaths.length;
+
+    const slider = document.getElementById('slider');
+    let currentIndex = 0;
+    let direction = 1; // forward or backward
+    let visibleCount = 5; // default visible images
+
+    // Create slides dynamically
+    for(let i = 0; i < imageCount; i++) {
+      const slide = document.createElement('div');
+      slide.classList.add('slide', 'cursor-pointer', 'transition-all', 'duration-300');
+      slide.innerHTML = `<img src="${imagePaths[i]}" alt="Slide ${i+1}" class="slide-img h-[120px] rounded-lg object-contain transition-all duration-300" />`;
+      slider.appendChild(slide);
+    }
+
+    const slides = slider.children;
+
+    // Update visibleCount based on window width
+    function updateVisibleCount() {
+      const width = window.innerWidth;
+      if (width <= 375) {
+        visibleCount = 2;
+      } else if (width <= 425) {
+        visibleCount = 3;
+      } else {
+        visibleCount = 5;
+      }
+    }
+
+    // Show only visibleCount slides centered at currentIndex
+    function updateSlides() {
+      updateVisibleCount();
+
+      for(let i = 0; i < slides.length; i++) {
+        const img = slides[i].querySelector('img');
+        slides[i].classList.add('hidden');
+
+        // Remove all height classes first
+        img.classList.remove('h-[120px]', 'h-[281px]');
+
+        // If mobile view (<=375), set height to 180px
+        if (visibleCount === 2) {
+          img.classList.add('h-[180px]');
+        } else {
+          img.classList.add('h-[120px]');
+        }
+      }
+
+      // Calculate sideCount based on visibleCount
+      const sideCount = Math.floor((visibleCount - 1) / 2);
+
+      // Show center slide
+      slides[currentIndex].classList.remove('hidden');
+      const centerImg = slides[currentIndex].querySelector('img');
+
+      if (visibleCount > 2) {
+        centerImg.classList.remove('h-[120px]');
+        centerImg.classList.add('h-[281px]');
+      }
+
+      // Show left slides
+      for(let i = 1; i <= sideCount; i++) {
+        let leftIndex = (currentIndex - i + slides.length) % slides.length;
+        slides[leftIndex].classList.remove('hidden');
+      }
+
+      // Show right slides
+      for(let i = 1; i <= sideCount; i++) {
+        let rightIndex = (currentIndex + i) % slides.length;
+        slides[rightIndex].classList.remove('hidden');
+      }
+    }
+
+    updateSlides();
+
+    setInterval(() => {
+      currentIndex += direction;
+
+      if(currentIndex === slides.length - 1 || currentIndex === 0) {
+        direction *= -1;
+      }
+
+      updateSlides();
+    }, 2000);
+
+    window.addEventListener('resize', updateSlides);
+  </script>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </section>
+
+        </section>
+
+    </main>
+    
+</body>
+</html>
