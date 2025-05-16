@@ -31,7 +31,12 @@
                 </nav>
             </header>
 
-            <section class="mx-[56px] max-sm:mx-[28px] ">
+
+
+
+            
+
+            <div class="mx-[56px] max-sm:mx-[28px] ">
                 <div class="flex flex-col items-center">
                     <h1 class="didact text-white text-[88px] leading-[88px] mt-[12px] mb-[8px] text-center font-[600] max-sm:text-[40px] max-sm:leading-[44px] max-sm:mt-[24px] whitespace-nowrap">Fresh. Fast.<br>Flavor-packed.</h1>                    
                     <p class="inter text-[22px] font-400 leading-[32px] w-[50%] text-white/70 text-center max-xl:w-[70%] max-xl:text-[20px] max-lg:w-[80%] max-lg:text-[20px] max-md:w-[80%]  max-md:text-[16px] max-md:leading-[24px] max-sm:text-[14px]">Mega Chicken serves fresh, flavorful meals—fast. From grilled chicken to seafood and comfort classics, we’ve got your cravings covered.</p>
@@ -47,16 +52,14 @@
 
 
 
-                
-                <div class="flex justify-center items-center">
+<div class="flex justify-center items-center">
+  <div class="w-[900px] overflow-hidden relative mb-[48px]">
+    <div id="slider" class="flex justify-center items-center gap-[36px] h-[300px]">
+      <!-- JS will insert images here -->
+    </div>
+  </div>
 
-                    <div class="w-[900px] overflow-hidden relative mb-[48px]">
-                    <div id="slider" class="flex justify-center items-center gap-[36px]">
-                    <!-- JS will insert images here -->
-                    </div>
-                    </div>
-
-                    <script>
+  <script>
     const imagePaths = [
       './images/Image_fx (4).png',
       './images/Image_fx (4).png',
@@ -68,43 +71,53 @@
 
     const slider = document.getElementById('slider');
     let currentIndex = 0;
-    let direction = 1; // forward or backward
-    let visibleCount = 5; // default visible images
+    let direction = 1;
+    let visibleCount = 5;
 
     // Create slides dynamically
-    for(let i = 0; i < imageCount; i++) {
+    for (let i = 0; i < imageCount; i++) {
       const slide = document.createElement('div');
-      slide.classList.add('slide', 'cursor-pointer', 'transition-all', 'duration-300');
-      slide.innerHTML = `<img src="${imagePaths[i]}" alt="Slide ${i+1}" class="slide-img h-[120px] rounded-lg object-contain transition-all duration-300" />`;
+      slide.classList.add(
+        'slide',
+        'cursor-pointer',
+        'transition-all',
+        'duration-300'
+      );
+      slide.innerHTML = `<img src="${imagePaths[i]}" alt="Slide ${i + 1}" class="slide-img h-[120px] rounded-lg object-contain transition-all duration-300" />`;
       slider.appendChild(slide);
     }
 
     const slides = slider.children;
 
-    // Update visibleCount based on window width
     function updateVisibleCount() {
       const width = window.innerWidth;
-      if (width <= 375) {
-        visibleCount = 2;
-      } else if (width <= 425) {
-        visibleCount = 3;
+      if (width <= 425) {
+        visibleCount = 2; // <- Set 2 for 425px and below
       } else {
         visibleCount = 5;
       }
+
+      if (width <= 425) {
+        slider.classList.add('flex-wrap');
+      } else {
+        slider.classList.remove('flex-wrap');
+      }
     }
 
-    // Show only visibleCount slides centered at currentIndex
     function updateSlides() {
       updateVisibleCount();
 
-      for(let i = 0; i < slides.length; i++) {
-        const img = slides[i].querySelector('img');
-        slides[i].classList.add('hidden');
+      for (let i = 0; i < slides.length; i++) {
+        const slide = slides[i];
+        const img = slide.querySelector('img');
 
-        // Remove all height classes first
-        img.classList.remove('h-[120px]', 'h-[281px]');
+        // Reset all
+        slide.classList.remove('opacity-100', 'relative', 'block');
+        slide.classList.add('opacity-0', 'hidden');
 
-        // If mobile view (<=375), set height to 180px
+        // Remove all height classes
+        img.classList.remove('h-[120px]', 'h-[180px]', 'h-[281px]');
+
         if (visibleCount === 2) {
           img.classList.add('h-[180px]');
         } else {
@@ -112,28 +125,26 @@
         }
       }
 
-      // Calculate sideCount based on visibleCount
       const sideCount = Math.floor((visibleCount - 1) / 2);
 
-      // Show center slide
-      slides[currentIndex].classList.remove('hidden');
-      const centerImg = slides[currentIndex].querySelector('img');
+      const showSlide = (index) => {
+        const slide = slides[index];
+        slide.classList.remove('opacity-0', 'hidden');
+        slide.classList.add('opacity-100', 'relative', 'block');
+      };
 
+      // Show center
+      showSlide(currentIndex);
+      const centerImg = slides[currentIndex].querySelector('img');
       if (visibleCount > 2) {
         centerImg.classList.remove('h-[120px]');
         centerImg.classList.add('h-[281px]');
       }
 
-      // Show left slides
-      for(let i = 1; i <= sideCount; i++) {
-        let leftIndex = (currentIndex - i + slides.length) % slides.length;
-        slides[leftIndex].classList.remove('hidden');
-      }
-
-      // Show right slides
-      for(let i = 1; i <= sideCount; i++) {
-        let rightIndex = (currentIndex + i) % slides.length;
-        slides[rightIndex].classList.remove('hidden');
+      // Show sides
+      for (let i = 1; i <= sideCount; i++) {
+        showSlide((currentIndex - i + slides.length) % slides.length);
+        showSlide((currentIndex + i) % slides.length);
       }
     }
 
@@ -141,46 +152,21 @@
 
     setInterval(() => {
       currentIndex += direction;
-
-      if(currentIndex === slides.length - 1 || currentIndex === 0) {
+      if (currentIndex === slides.length - 1 || currentIndex === 0) {
         direction *= -1;
       }
-
       updateSlides();
     }, 2000);
 
     window.addEventListener('resize', updateSlides);
   </script>
-
 </div>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            </section>
-
         </section>
+
+
 
     </main>
     
